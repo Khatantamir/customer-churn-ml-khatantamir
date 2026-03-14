@@ -54,7 +54,7 @@ The model was evaluated using a **train/test split**.
 
 Evaluation metric:
 
-**Accuracy: ~78%**
+**Accuracy: ~78.5%**
 
 This means the model correctly predicts whether a customer will churn approximately **78% of the time on unseen data**.
 
@@ -71,7 +71,7 @@ customer-churn-ml-khatantamir
 │   └── main.py
 │
 ├── data
-│   └── churn_dataset.csv
+│   └── telco_churn.csv
 │
 ├── models
 │   ├── churn_model.pkl
