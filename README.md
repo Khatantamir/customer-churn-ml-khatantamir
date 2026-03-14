@@ -23,7 +23,7 @@ These features are used to train a model that predicts whether a customer will c
 
 The model was trained using **scikit-learn**.
 
-Steps:
+Steps used in the training pipeline:
 
 1. Data preprocessing and cleaning
 2. Feature encoding
@@ -31,9 +31,17 @@ Steps:
 4. Model evaluation
 5. Saving the trained model
 
-Model performance:
+## Model Performance
+
+The machine learning model was evaluated using a train/test split.
+
+Evaluation metric:
 
 Accuracy: **~78%**
+
+This means the model correctly predicts whether a customer will churn approximately 78% of the time on unseen data.
+
+The trained model and scaler were saved using **joblib** and are used by the FastAPI service for real-time predictions.
 
 ## Project Structure
 
@@ -100,4 +108,3 @@ The API returns the predicted churn result.
 ## Author
 
 Khatantamir Otgonbyamba
-
