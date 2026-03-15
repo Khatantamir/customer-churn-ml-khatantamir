@@ -1,9 +1,13 @@
 import streamlit as st
-import requests
+import joblib
+import numpy as np
 
 st.title("Customer Churn Prediction")
-
 st.write("Enter customer data to predict churn risk")
+
+# load model
+model = joblib.load("models/churn_model.pkl")
+scaler = joblib.load("models/scaler.pkl")
 
 tenure = st.slider("Tenure (months)", 0, 72, 12)
 monthly_charges = st.slider("Monthly Charges", 0, 200, 70)
@@ -11,20 +15,12 @@ total_charges = st.slider("Total Charges", 0, 10000, 2000)
 
 if st.button("Predict Churn"):
 
-    features = [tenure, monthly_charges, total_charges]
+    X = np.array([[tenure, monthly_charges, total_charges]])
+    X_scaled = scaler.transform(X)
 
-    try:
-        response = requests.post(
-            "http://localhost:8000/predict",
-            json=features
-        )
+    pred = model.predict(X_scaled)[0]
 
-        result = response.json()
-
-        if result["churn_prediction"] == 1:
-            st.error("Customer likely to churn")
-        else:
-            st.success("Customer likely to stay")
-
-    except:
-        st.warning("API not running")
+    if pred == 1:
+        st.error("Customer likely to churn")
+    else:
+        st.success("Customer likely to stay")
